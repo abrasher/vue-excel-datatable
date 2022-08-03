@@ -3,16 +3,24 @@ import vue from "@vitejs/plugin-vue"
 import { readFileSync } from "fs"
 import { homedir } from "os"
 import { resolve } from "path"
+import WindiCSS from "vite-plugin-windicss"
 
 const homeDir = homedir()
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
-  server: {
-    https: {
-      key: readFileSync(resolve(`${homedir}/.office-addin-dev-certs/localhost.key`)),
-      cert: readFileSync(resolve(`${homedir}/.office-addin-dev-certs/localhost.crt`)),
-      ca: readFileSync(resolve(`${homedir}/.office-addin-dev-certs/ca.crt`)),
+  plugins: [vue(), WindiCSS()],
+  build: {
+    lib: {
+      entry: resolve(__dirname, "src/index.ts"),
+      name: "datatable",
+    },
+    rollupOptions: {
+      external: ["vue"],
+      output: {
+        globals: {
+          vue: "Vue",
+        },
+      },
     },
   },
 })
