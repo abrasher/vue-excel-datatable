@@ -1,0 +1,1 @@
+export { useExcelTable } from "./useExcelTable"

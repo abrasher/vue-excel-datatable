@@ -11,7 +11,7 @@ export default defineConfig({
   plugins: [vue(), WindiCSS()],
   build: {
     lib: {
-      entry: resolve(__dirname, "src/index.ts"),
+      entry: resolve(__dirname, "src/main.ts"),
       name: "datatable",
     },
     rollupOptions: {

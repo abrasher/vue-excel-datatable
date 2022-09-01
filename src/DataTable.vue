@@ -27,21 +27,22 @@
   </div>
 </template>
 
-<script lang="ts">
-interface DataTableProps {
+<script setup lang="ts">
+import type { ColumnDef } from "../composables/TableStore.interface"
+import { useExcelTable } from "../composables"
+
+// Must export props interface to avoid build errors
+export interface Props {
   sheetName: string
   tableName: string
   columnDefs: ColumnDef[]
 }
-</script>
 
-<script setup lang="ts">
-import { ColumnDef } from "./ReactiveTableStore.interface"
-import { useTableStore } from "./ReactiveTableStore"
+const updatePond = () => {}
 
-const props = defineProps<DataTableProps>()
+const props = defineProps<Props>()
 
-const table = useTableStore({
+const table = useExcelTable({
   sheetName: "TableSheet",
   tableName: "TestTabel",
   columnDefs: [
